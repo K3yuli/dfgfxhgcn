@@ -1,7 +1,7 @@
-// route that the front-end can request data from
-const { animals } = require('./data/animals.json');
-
 const express = require('express');
+// route that the front-end can request data from
+const { animals } = require('./data/animals');
+
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -46,6 +46,11 @@ function filterByQuery(query, animalsArray) {
     return filteredResults;
 }
 
+// function findById() that takes in the id and array of animals and returns a single animal object
+function findById(id, animalsArray) {
+    const result = animalsArray.filter(animal => animal.id === id)[0];
+    return result;
+}
 
 // add the route of animals
 app.get('/api/animals', (req, res) => {
@@ -56,6 +61,17 @@ app.get('/api/animals', (req, res) => {
         results = filterByQuery(req.query, results);
     }
     res.json(results);
+});
+
+// new GET route for animals
+// A param route must come after the other GET route.
+app.get('api/animals/:id', (req, res) => {
+    const result = findById(req.params.id, animals);
+    if(result) {
+        res.json(result);
+    } else {
+        res.send(404);
+    }
 });
 
 app.listen(PORT, () => {
