@@ -74,6 +74,13 @@ app.get('api/animals/:id', (req, res) => {
     }
 });
 
+// route that listens for POST requests
+app.post('/api/animals', (req, res) => {
+    // req.body is where our incoming content will be
+    console.log(req.body);
+    res.json(req.body);
+});
+
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
 });       
