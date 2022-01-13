@@ -12,6 +12,9 @@ app.use(express.urlencoded({ extended: true}));
 // parse incoming JSON data
 app.use(express.json());
 
+// middleware that instructs the server to make certain files readily available and to not gate it behind a server endpoint.
+app.use(express.static('public'));
+
 // keep our code maintainable and clean
 // This function will take in req.query as an argument and 
 // filter through the animals accordingly, returning the new filtered array
@@ -125,6 +128,25 @@ app.post('/api/animals', (req, res) => {
             // req.body is where our incoming content will be
             res.json(animal);
     }
+});
+
+// the '/' brings us to the root route of the server!
+// This is the route used to create a homepage for a server.
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+// route for animals
+app.get('/animals', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+
+app.get('/zookeepers', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+});
+
+// wildcard routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 app.listen(PORT, () => {
