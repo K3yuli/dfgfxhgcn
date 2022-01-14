@@ -20,5 +20,8 @@
   "homepage": "https://github.com/K3yuli/dfgfxhgcn#readme",
   "dependencies": {
     "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "jest": "^27.4.7"
   }
 }
