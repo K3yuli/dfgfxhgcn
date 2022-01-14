@@ -1,4 +1,3 @@
-const { response } = require("express");
 const $zookeeperForm = document.querySelector('#zookeeper-form');
 const $animalForm = document.querySelector('#animal-form');
 
